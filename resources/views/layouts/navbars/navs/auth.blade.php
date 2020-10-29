@@ -11,6 +11,31 @@
     <span class="navbar-toggler-icon icon-bar"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end">
+      <div class="collapse navbar-collapse justify-content-center">
+      <form class="navbar-form" role="form" action="{{ route('language.store') }}" method="post">
+          @csrf
+          <input
+                  type="radio"
+                  id="englishChoice"
+                  name="language"
+                  @if (old('language', auth()->user()->language) == 'eng')
+                  checked=""
+                  @endif
+                  value="eng">
+          <label for="englishChoice">English</label>
+          <input
+                  type="radio"
+                  id="russianChoice"
+                  name="language"
+                  @if (old('language', auth()->user()->language) == 'ru')
+                  checked=""
+                  @endif
+                  value="ru">
+          <label for="russianChoice">Russian</label>
+          <button type="submit" class="btn">OK</button>
+      </form>
+      </div>
+
       <form class="navbar-form">
         <div class="input-group no-border">
         <input type="text" value="" class="form-control" placeholder="Search...">
@@ -20,6 +45,7 @@
         </button>
         </div>
       </form>
+
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="{{ route('home') }}">

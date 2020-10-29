@@ -61,3 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
+Route::group(['prefix' => 'language', 'middleware' => 'auth'], function () {
+    Route::post('/store', ['as' => 'language.store', 'uses' => 'App\Http\Controllers\LanguageController@store']);
+    Route::get('/test', ['as' => 'language.test', 'uses' => 'App\Http\Controllers\LanguageController@test']);
+});
