@@ -63,5 +63,4 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'language', 'middleware' => 'auth'], function () {
     Route::post('/store', ['as' => 'language.store', 'uses' => 'App\Http\Controllers\LanguageController@store']);
-    Route::get('/test', ['as' => 'language.test', 'uses' => 'App\Http\Controllers\LanguageController@test']);
 });

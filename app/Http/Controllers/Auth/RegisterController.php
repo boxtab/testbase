@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,10 +65,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $referrer = User::whereReferral(session()->pull('referrer'))->first();
+
         return User::create([
+            'referrer_id' => $referrer ? $referrer->id : null,
             'name' => $data['name'],
             'email' => $data['email'],
+            'referral' => getUniqueReferralLink($data['email']),
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * Покажите регистрационную форму заявки.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function showRegistrationForm(Request $request)
+    {
+        if ($request->has('ref')) {
+            session(['referrer' => $request->query('ref')]);
+        }
+
+        return view('auth.register');
     }
 }

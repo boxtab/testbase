@@ -17,6 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'referrer_id',
         'name',
         'email',
         'password',
@@ -42,4 +43,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * У пользователя есть реферал.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id', 'id');
+    }
+
+    /**
+     * У пользователя много рефералов.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id', 'id');
+    }
 }

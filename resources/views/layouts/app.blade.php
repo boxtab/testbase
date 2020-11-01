@@ -146,6 +146,7 @@
         <!-- Material Dashboard DEMO methods, don't include it in your project! -->
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
+        <script src="{{ asset('material/js/profile.js') }}" defer></script>
         @stack('js')
     </body>
 </html>

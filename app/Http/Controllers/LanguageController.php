@@ -20,21 +20,4 @@ class LanguageController extends Controller
         auth()->user()->update(['language' => $request->language]);
         return back()->withInput();
     }
-
-    public function test()
-    {
-/*        DB::table('users')->update([
-            'referral' => '',
-        ]);
-        return date('YmdHis');*/
-
-//        DB::table('users')
-//            ->chunkById(100, function ($users) {
-//                foreach ($users as $user) {
-//                    DB::table('users')
-//                        ->update(['referral' => $user->id]);
-//                }
-//            });
-        return str_replace('@', '_', 'admin@admin.com');
-    }
 }

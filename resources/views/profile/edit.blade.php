@@ -4,6 +4,7 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
+        <input type="text" id="copy-text" style="opacity: 0">
         <div class="col-md-12">
           <form method="post" action="{{ route('profile.update') }}" autocomplete="off" class="form-horizontal">
             @csrf
@@ -27,6 +28,9 @@
                     </div>
                   </div>
                 @endif
+
+
+
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Name') }}</label>
                   <div class="col-sm-7">
@@ -38,6 +42,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
                   <div class="col-sm-7">
@@ -48,6 +53,22 @@
                       @endif
                     </div>
                   </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">{{ __('Referral link') }}</label>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <input class="form-control"
+                                   name="referral"
+                                   id="input-referral"
+                                   type="text"
+                                   disabled
+                                   value="{{ old('referral-link', env('APP_URL') . '/register?ref=' . auth()->user()->referral) }}"/>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary copy-referral-id"
+                            type="button"
+                            title="Copy to clipboard">Copy</button>
                 </div>
               </div>
               <div class="card-footer ml-auto mr-auto">
