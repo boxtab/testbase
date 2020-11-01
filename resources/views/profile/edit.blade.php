@@ -78,6 +78,33 @@
           </form>
         </div>
       </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">{{ __('Referral tree') }}</h4>
+                            <p class="card-category">{{ __('Referral tree') }}</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul>
+                                        @foreach ($parentReferral as $taxonomy)
+                                            @php $level = 1 @endphp
+                                            <li>{{ $taxonomy->name }}</li>
+                                            @if(count($taxonomy->referrals))
+                                                @include('profile.child',['subreferrals' => $taxonomy->referrals, 'level' => ++$level])
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
       <div class="row">
         <div class="col-md-12">
           <form method="post" action="{{ route('profile.password') }}" class="form-horizontal">
